@@ -1,0 +1,12 @@
+speechRecognition 
+time
+winsound
+subprocess
+pyttsx3
+webbrowser
+datetime
+os
+pyautogui
+psutil
+pyjokes
+requests
