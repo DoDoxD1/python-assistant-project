@@ -1,6 +1,5 @@
 import speech_recognition as sr
 import time
-import winsound
 import subprocess as sbp
 import pyttsx3
 import webbrowser
@@ -37,44 +36,6 @@ def recog():
         return recog_resl
     except UnboundLocalError:
         pass
-
-
-def movie():
-    speak("Lights are already turned off")
-    speak("Starting Netflix")
-    sbp.call(["python", "pyflix.py"])
-
-
-def uims():
-    speak("Logging in.....")
-    sbp.call(["python", "uimsLogin.py"])
-
-
-def blackboard():
-    speak("Joining Class")
-    sbp.call(["python", "login.py"])
-
-
-def windows_7():
-    speak("starting Windows 7")
-    sbp.call(
-        ["C:/Users/ksudh/Documents/Virtual Machines/Windows 7/Windows 7.vmx"],
-        shell=True,
-    )
-
-
-def payload():
-    sbp.call(
-        "pyinstaller "
-        + "--noconfirm "
-        + "--onefile "
-        + "--windowed "
-        + "--icon "
-        + '"exeico.ico" '
-        + '"D:/Python/MYSP/services.py"'
-    )
-    speak("Payload Generated")
-    speak("You can check your output folder")
 
 
 def tell_jokes():
@@ -137,13 +98,12 @@ def weather(city):
     r = requests.get(f"https://wttr.in/{city}?format=j1")
     weather = r.json()["current_condition"][0]["weatherDesc"][0]["value"]
     temp = r.json()["current_condition"][0]["temp_C"]
-    speak("Today's weather: " + weather)
+    speak("Today's weather in chandigarh: " + weather)
     speak("Current Temperature: " + temp + " degree celsius")
 
 
 def cityName():
-    speak("Which city?")
-    city = recog()
+    city = "Chandigarh"
     return city
 
 
@@ -151,8 +111,6 @@ def greet():
     hour = datetime.datetime.now().hour
     if hour >= 6 and hour < 12:
         speak("Good morning sir!")
-        speak("Hello sir, Current weather and Temperature is")
-        weather("Chakradharpur")
     elif hour >= 12 and hour < 16:
         speak("Good afternoon sir!")
     elif hour >= 16 and hour < 24:
@@ -183,36 +141,11 @@ def cca():
     pyautogui.hotkey("alt", "f4")
 
 
-def music():
-    try:
-        speak("Opening Prime Music")
-        pyautogui.press("win")
-        pyautogui.write("amazon music")
-        pyautogui.press("enter")
-        time.sleep(15)
-        speak("Which song sir,")
-        musix = recog().lower()
-        speak("Okay playing, " + musix)
-        pyautogui.click(x=1628, y=92)
-        pyautogui.write(musix)
-        time.sleep(2)
-        pyautogui.click(x=1616, y=225)
-        time.sleep(2)
-        pyautogui.click(x=118, y=390)
-    except Exception:
-        pass
-
-
 def info():
     speak("Well, Hello I'm advik")
     speak("And I was created by Sudhanshu Kumar")
     speak("Currently my verison is 3.6")
     speak("And I am Learning")
-
-
-def code():
-    speak("Opening Your Favourite IDE")
-    pyautogui.hotkey("ctrl", "alt", "S")
 
 
 def tasks_do(task):
@@ -244,18 +177,11 @@ def tasks_do(task):
             city = cityName()
             weather(city)
 
-        elif "login" in task:
-            uims()
-        elif "music" in task:
-            music()
         elif "close" in task:
             cca()
         elif "screenshot" in task:
             screenshot()
-        elif "code" in task:
-            code()
-        elif "coding" in task:
-            code()
+
         elif "about" in task:
             info()
         elif "switch" in task:
@@ -281,7 +207,8 @@ if __name__ == '__main__':
         query = recog()
         query = query.lower()
         print(query)
+        tasks_do(query)
     except Exception:
         print("I can't hear you")
     
-    tasks_do(query)
+    
