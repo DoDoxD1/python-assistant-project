@@ -143,7 +143,7 @@ def cca():
 
 def info():
     speak("Well, Hello I'm advik")
-    speak("And I was created by Sudhanshu Kumar")
+    speak("And I was created by Chandigarh university")
     speak("Currently my verison is 3.6")
     speak("And I am Learning")
 
